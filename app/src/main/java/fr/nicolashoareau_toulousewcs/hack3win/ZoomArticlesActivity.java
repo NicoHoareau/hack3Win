@@ -7,7 +7,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-public class MenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class ZoomArticlesActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
@@ -15,11 +15,11 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        setContentView(R.layout.activity_zoom_articles);
 
         //Navigation Drawer :
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_menu);
-        mToggle = new ActionBarDrawerToggle(MenuActivity.this, mDrawerLayout, R.string.open, R.string.close);
+        mToggle = new ActionBarDrawerToggle(ZoomArticlesActivity.this, mDrawerLayout, R.string.open, R.string.close);
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -36,7 +36,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.profil) {
-            //Intent goToProfil = new Intent(MenuActivity.this, ProfilActivity.class);
+            //Intent goToProfil = new Intent(ZoomArticlesActivity.this, ProfilActivity.class);
             //this.startActivity(goToProfil);
         } else if (id == R.id.reader) {
             //Intent goToJoin = new Intent(this, JoinQuizzActivity.class);
