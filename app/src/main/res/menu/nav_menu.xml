@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/profil"
+        android:title="Profil">
+    </item>
+
+    <item
+        android:id="@+id/reader"
+        android:title="Lecteur">
+    </item>
+
+    <item
+        android:id="@+id/contributor"
+        android:title="Contributeur">
+    </item>
+
+    <item
+        android:id="@+id/articles"
+        android:title="Articles">
+    </item>
+
+    <item
+        android:id="@+id/logout"
+        android:icon="@android:drawable/ic_lock_power_off"
+        android:title="Déconnexion">
+    </item>
+
+</menu>
