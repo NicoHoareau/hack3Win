@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "903502472733",
+    "firebase_url": "https://hack3win.firebaseio.com",
+    "project_id": "hack3win",
+    "storage_bucket": "hack3win.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:903502472733:android:77cc7e26c6b9186a",
+        "android_client_info": {
+          "package_name": "fr.nicolashoareau_toulousewcs.hack3win"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "903502472733-q8u0fho2ksank1mvq9jpbj6okrjrm0bt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fr.nicolashoareau_toulousewcs.hack3win",
+            "certificate_hash": "c2225026a45915b57fe136e31b96be77c301bd92"
+          }
+        },
+        {
+          "client_id": "903502472733-1b7c541nlpumh3r6jn8ekjvh7c4o5hih.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "903502472733-1b7c541nlpumh3r6jn8ekjvh7c4o5hih.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmTfQ0aSKC4mBvCXtl6o0u6Yys2dKYW4I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "903502472733-1b7c541nlpumh3r6jn8ekjvh7c4o5hih.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

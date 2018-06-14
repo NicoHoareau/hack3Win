@@ -40,6 +40,7 @@ public class RecordActivity extends AppCompatActivity {
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
             Uri videoUri = data.getData();
             mVrecord.setVideoURI(videoUri);
+            mVrecord.start();
         }
     }
 }
