@@ -7,39 +7,47 @@
     tools:context=".TempActivity">
 
     <RelativeLayout
+        android:id="@+id/relLayout1"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:background="#fff"
-        android:id="@+id/relLayout1">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mg_btn_maps">
 
         <android.support.v7.widget.AppCompatImageView
-            android:layout_width="25dp"
-            android:layout_height="match_parent"
             android:id="@+id/search_image"
-            android:layout_marginLeft="5dp"
-            android:src="@drawable/ic_search_icon"
-            />
+            android:layout_width="18dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:src="@drawable/ic_search_icon" />
 
-        <EditText
+        <AutoCompleteTextView
+            android:id="@+id/input_search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/input_search"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/search_image"
-            android:textSize="15sp"
-            android:textColor="#000"
+            android:layout_marginLeft="25dp"
             android:background="@null"
             android:hint="Entrer une adresse, une ville ou un code postale"
-            android:imeOptions="actionSearch"/>
+            android:imeOptions="actionSearch"
+            android:textColor="#000"
+            android:textSize="15sp" />
 
 
     </RelativeLayout>
 
     <br.com.bloder.magic.view.MagicButton
-        android:id="@+id/magic_button"
+        android:id="@+id/mg_btn_video"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         app:button_icon="@drawable/camera_video_icon"
         app:button_icon_height="25dp"
         app:button_icon_width="25dp"
@@ -48,7 +56,46 @@
         app:hide_text_color="@android:color/black"
         app:hide_text_size="8sp"
         app:icon_button_color="#17aa40"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:magic_button_size="50dp" />
+
+    <br.com.bloder.magic.view.MagicButton
+        android:id="@+id/mg_btn_title_article"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:button_icon="@drawable/camera_video_icon"
+        app:button_icon_height="25dp"
+        app:button_icon_width="25dp"
+        app:expandable_area_color="#6ab378"
+        app:hide_text="Magic button!"
+        app:hide_text_color="@android:color/black"
+        app:hide_text_size="8sp"
+        app:icon_button_color="#17aa40"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mg_btn_video"
+        app:magic_button_size="50dp" />
+
+    <br.com.bloder.magic.view.MagicButton
+        android:id="@+id/mg_btn_maps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:button_icon="@drawable/camera_video_icon"
+        app:button_icon_height="25dp"
+        app:button_icon_width="25dp"
+        app:expandable_area_color="#6ab378"
+        app:hide_text="Magic button!"
+        app:hide_text_color="@android:color/black"
+        app:hide_text_size="8sp"
+        app:icon_button_color="#17aa40"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mg_btn_title_article"
         app:magic_button_size="50dp" />
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
@@ -56,16 +103,16 @@
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="277dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="234dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relLayout1"
         tools:context=".TempActivity"
         tools:ignore="MissingConstraints" />
 

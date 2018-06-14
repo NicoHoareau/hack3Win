@@ -2,34 +2,37 @@ package fr.nicolashoareau_toulousewcs.hack3win;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.nfc.Tag;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
+import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.places.GeoDataClient;
+import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -39,13 +42,15 @@ import java.util.List;
 
 import br.com.bloder.magic.view.MagicButton;
 
-public class TempActivity extends FragmentActivity implements OnMapReadyCallback {
+public class TempActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener {
 
     private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 1023;
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationClient;
 
-    private EditText mSearchText;
+    private AutoCompleteTextView mSearchText;
+    //private PlaceArrayAdapter mPlaceArrayAdapter;
+    private GoogleApiClient mGoogleApiClient;
 
     //magic button :
     MagicButton mMagicButton;
@@ -60,7 +65,7 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        mSearchText = (EditText) findViewById(R.id.input_search);
+        mSearchText = (AutoCompleteTextView) findViewById(R.id.input_search);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -69,7 +74,7 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
         init();
 
 
-        mMagicButton = findViewById(R.id.magic_button);
+        mMagicButton = findViewById(R.id.mg_btn_video);
         mMagicButton.setMagicButtonClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +84,15 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
     private void init() {
+
+        //mPlaceAutocompleteAdapter = new PlaceAutocompleteAdapter(this, mGoogleApiClient, LAT_LNG_BOUNDS, null);
+
         mSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -107,17 +120,11 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
         if (list.size() > 0) {
             Address address = list.get(0);
             Toast.makeText(this, address.toString(), Toast.LENGTH_LONG).show();
+
         }
 
 
-
-
-
     }
-
-
-
-
 
 
     private void askLocationPermission() {
@@ -217,8 +224,8 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
     private void moveCameraOnUser(Location location) {
         LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
         //ajoute un marker :
-        // mMap.addMarker(new MarkerOptions().position(userLocation).title("Marker in Sydney"));
-        CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(userLocation, 10);
+        mMap.addMarker(new MarkerOptions().position(userLocation));
+        CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(userLocation, 12);
         mMap.setBuildingsEnabled(true);
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -226,7 +233,11 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
 
         }
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
+       // mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
+
+        //Marker marker = mMap.addMarker(new MarkerOptions().position(userLocation));
+        //marker.showInfoWindow();
+
 
     }
 
@@ -251,4 +262,6 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
         init();
 
     }
+
+
 }
