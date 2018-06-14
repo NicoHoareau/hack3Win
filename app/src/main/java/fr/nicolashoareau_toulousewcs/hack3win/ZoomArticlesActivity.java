@@ -7,62 +7,60 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class ZoomArticlesActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
 
-    private DrawerLayout mDrawerLayout;
-    private ActionBarDrawerToggle mToggle;
+import org.w3c.dom.Text;
+
+public class ZoomArticlesActivity extends YouTubeBaseActivity {
+
+    private final String API_KEY="AIzaSyBt5qNEPgi0aIJrgMzE_JkH9uVbgh8Vy7U";
+    private final String VIDEO_CODE="nc7Z3EBMevg";
+    YouTubePlayerView playerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zoom_articles);
 
-        //Navigation Drawer :
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_menu);
-        mToggle = new ActionBarDrawerToggle(ZoomArticlesActivity.this, mDrawerLayout, R.string.open, R.string.close);
-        mDrawerLayout.addDrawerListener(mToggle);
-        mToggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //Navigation View :
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        playerView = (YouTubePlayerView) findViewById(R.id.youTubePlayerView);
+        playerView.initialize(API_KEY, new YouTubePlayer.OnInitializedListener() {
+            @Override
+            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+                if (!b){
+                    youTubePlayer.loadVideo(VIDEO_CODE);
+                    youTubePlayer.setPlayerStyle(YouTubePlayer.PlayerStyle.DEFAULT);
+                }
+            }
+
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+                Toast.makeText(ZoomArticlesActivity.this, youTubeInitializationResult.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        TextView tvArticleTitle = findViewById(R.id.tv_articles_title);
+        TextView tvArticleResume = findViewById(R.id.tv_resume_articles);
+        Button link = findViewById(R.id.btn_link);
+
+
+        //click bouton lien vers le site
+        link.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
 
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-        if (id == R.id.profil) {
-            //Intent goToProfil = new Intent(ZoomArticlesActivity.this, ProfilActivity.class);
-            //this.startActivity(goToProfil);
-        } else if (id == R.id.reader) {
-            //Intent goToJoin = new Intent(this, JoinQuizzActivity.class);
-            //this.startActivity(goToJoin);
-        } else if (id == R.id.contributor) {
-            Intent goToContributor = new Intent(this, ContributeurActivity.class);
-            this.startActivity(goToContributor);
-        } else if (id == R.id.articles) {
-            //intent
 
-        } else if (id == R.id.logout) {
-            //Déconnexion
-            /*mAuth = FirebaseAuth.getInstance();
-            mAuth.signOut();
-            startActivity(new Intent(this, MainActivity.class));*/
-        }
-        return true;
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (mToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }
