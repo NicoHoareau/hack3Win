@@ -60,7 +60,6 @@ public class ConnectionActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.getChildrenCount() == 0) {
-
                             Toast.makeText(ConnectionActivity.this, "Votre numéro est incorrect", Toast.LENGTH_SHORT).show();
                         }
 
@@ -103,28 +102,20 @@ public class ConnectionActivity extends AppCompatActivity {
                         final HashCode hashCode = Hashing.sha256().hashString(stringPassword, Charset.defaultCharset());
 
                         if (mSpinnerPosition == 0) {
-
                             mStatus = "Lecteur";
-
                             UserModel studentModel = new UserModel(stringNumber, hashCode.toString(), mStatus, null, null, null);
                             DatabaseReference studentRef = myRef.child("Users");
                             studentRef.push().setValue(studentModel);
-
                             Intent intentMainActivity = new Intent(ConnectionActivity.this, MainActivity.class);
                             startActivity(intentMainActivity);
+
                         } else {
-
                             mStatus = "Contributeur";
-
                             AlertDialog.Builder builder = new AlertDialog.Builder(ConnectionActivity.this);
-
                             LayoutInflater inflater = getLayoutInflater();
                             final View dialogView = inflater.inflate(R.layout.alertdialog_custom_view, null);
-
                             builder.setCancelable(false);
-
                             builder.setView(dialogView);
-
                             Button btn_positive = dialogView.findViewById(R.id.bt_validate);
 
                             final AlertDialog dialog = builder.create();

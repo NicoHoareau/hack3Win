@@ -2,12 +2,15 @@ package fr.nicolashoareau_toulousewcs.hack3win;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -21,10 +24,13 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -60,6 +66,12 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
     private Boolean isClick = false;
     ConstraintLayout consLayoutMaps;
     ConstraintLayout consLayoutVideo;
+    ConstraintLayout consLayoutArticle;
+
+    Button btnValidate;
+
+    static final int REQUEST_VIDEO_CAPTURE = 1;
+    VideoView mVrecord;
 
 
     @Override
@@ -81,18 +93,17 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
 
         tvTitleArticle = findViewById(R.id.tv_title_article);
         etTitleArticle = findViewById(R.id.et_title_article);
+        consLayoutArticle = findViewById(R.id.cnsLayoutArticle);
         mBtnTitleArticle = findViewById(R.id.fab_title_article);
         mBtnTitleArticle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!isClick) {
-                    tvTitleArticle.setVisibility(View.VISIBLE);
-                    etTitleArticle.setVisibility(View.VISIBLE);
+                    consLayoutArticle.setVisibility(View.VISIBLE);
                     isClick = true;
                 }
                 else {
-                    tvTitleArticle.setVisibility(View.GONE);
-                    etTitleArticle.setVisibility(View.GONE);
+                    consLayoutArticle.setVisibility(View.GONE);
                     isClick = false;
                 }
 
@@ -123,6 +134,17 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
             public void onClick(View v) {
                 if (!isClick) {
                     consLayoutVideo.setVisibility(View.VISIBLE);
+                    FloatingActionButton record = findViewById(R.id.fab_create_video);
+                    mVrecord = findViewById(R.id.vv_record);
+                    record.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+                            if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
+                                startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
+                            }
+                        }
+                    });
                     isClick = true;
                 }
                 else {
@@ -151,11 +173,25 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+        btnValidate = findViewById(R.id.btn_validate);
+        btnValidate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TempActivity.this, MainActivity.class);
+                startActivity(intent);
+                Toast.makeText(TempActivity.this, "Article enregistré", Toast.LENGTH_SHORT).show();
+            }
+        });
 
+    }
 
-
-
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
+            Uri videoUri = data.getData();
+            mVrecord.setVideoURI(videoUri);
+            mVrecord.start();
+        }
     }
 
     @Override
