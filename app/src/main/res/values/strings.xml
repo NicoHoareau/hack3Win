@@ -14,4 +14,12 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="title_activity_temp">Map</string>
+
+    <string-array name="spinner_tag1">
+        <item>Sélectionner un tag :</item>
+        <item>Ecologie</item>
+        <item>Social</item>
+        <item>Economie</item>
+        <item>Technologie</item>
+    </string-array>
 </resources>

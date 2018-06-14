@@ -6,114 +6,187 @@
     android:layout_height="match_parent"
     tools:context=".TempActivity">
 
-    <RelativeLayout
-        android:id="@+id/relLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_title_article"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+
+    <TextView
+        android:id="@+id/tv_title_article"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:text="Titre de l'article"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/fab_title_article"
+        app:layout_constraintTop_toBottomOf="@+id/fab_title_article" />
+
+    <EditText
+        android:id="@+id/et_title_article"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:background="#fff"
+        android:layout_marginTop="4dp"
+        android:layout_weight="1"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mg_btn_maps">
-
-        <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/search_image"
-            android:layout_width="18dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:src="@drawable/ic_search_icon" />
-
-        <AutoCompleteTextView
-            android:id="@+id/input_search"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:background="@null"
-            android:hint="Entrer une adresse, une ville ou un code postale"
-            android:imeOptions="actionSearch"
-            android:textColor="#000"
-            android:textSize="15sp" />
+        app:layout_constraintStart_toEndOf="@+id/tv_title_article"
+        app:layout_constraintTop_toBottomOf="@+id/fab_title_article" />
 
 
-    </RelativeLayout>
-
-    <br.com.bloder.magic.view.MagicButton
-        android:id="@+id/mg_btn_video"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_video_article"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        app:button_icon="@drawable/camera_video_icon"
-        app:button_icon_height="25dp"
-        app:button_icon_width="25dp"
-        app:expandable_area_color="#6ab378"
-        app:hide_text="Magic button!"
-        app:hide_text_color="@android:color/black"
-        app:hide_text_size="8sp"
-        app:icon_button_color="#17aa40"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:magic_button_size="50dp" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_article"
+        tools:ignore="MissingConstraints" />
 
-    <br.com.bloder.magic.view.MagicButton
-        android:id="@+id/mg_btn_title_article"
-        android:layout_width="wrap_content"
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cnsLayoutVideo"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:button_icon="@drawable/camera_video_icon"
-        app:button_icon_height="25dp"
-        app:button_icon_width="25dp"
-        app:expandable_area_color="#6ab378"
-        app:hide_text="Magic button!"
-        app:hide_text_color="@android:color/black"
-        app:hide_text_size="8sp"
-        app:icon_button_color="#17aa40"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mg_btn_video"
-        app:magic_button_size="50dp" />
-
-    <br.com.bloder.magic.view.MagicButton
-        android:id="@+id/mg_btn_maps"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:button_icon="@drawable/camera_video_icon"
-        app:button_icon_height="25dp"
-        app:button_icon_width="25dp"
-        app:expandable_area_color="#6ab378"
-        app:hide_text="Magic button!"
-        app:hide_text_color="@android:color/black"
-        app:hide_text_size="8sp"
-        app:icon_button_color="#17aa40"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mg_btn_title_article"
-        app:magic_button_size="50dp" />
-
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="234dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relLayout1"
-        tools:context=".TempActivity"
+        app:layout_constraintTop_toBottomOf="@+id/fab_video_article">
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_create_video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/ic_input_add" />
+
+        <VideoView
+            android:id="@+id/post_video"
+            android:layout_width="match_parent"
+            android:layout_height="121dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fab_create_video" />
+
+        <Spinner
+            android:id="@+id/spin_tag1"
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/post_video"
+            app:layout_constraintTop_toBottomOf="@+id/post_video" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_maps_article"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cnsLayoutVideo"
         tools:ignore="MissingConstraints" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/consLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fab_maps_article">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/search_image"
+            android:layout_width="30dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/ic_search_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <AutoCompleteTextView
+            android:id="@+id/input_search"
+            android:layout_width="298dp"
+            android:layout_height="23dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:background="@null"
+            android:gravity="center"
+            android:hint="Entrer une adresse, une ville ou un code postale"
+            android:imeOptions="actionSearch"
+            android:textColor="#000"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/search_image"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="248dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_search"
+            tools:context=".TempActivity" />
+
+    </android.support.constraint.ConstraintLayout>
+
+
 
 </android.support.constraint.ConstraintLayout>
