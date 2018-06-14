@@ -16,10 +16,7 @@ public class ContributeurActivity extends AppCompatActivity {
         final ListView listView = findViewById(R.id.listview_contributeur);
         ArrayList<ContributeurModel> contributeur = new ArrayList<>();
 
-        // Test de la List
-        contributeur.add(new ContributeurModel("android.ressource://" + getPackageName() + "/" + R.raw.lesport ,"le sport","video sport jfjejfiejfiej enfieoife enfienfoie enozojzozf enfeoznf fei"));
-        contributeur.add(new ContributeurModel("android.ressource://" + getPackageName() + "/" + R.raw.lesport ,"le sport","video sport jfjejfiejfiej enfieoife enfienfoie enozojzozf enfeoznf fei"));
-        contributeur.add(new ContributeurModel("android.ressource://" + getPackageName() + "/" + R.raw.lesport ,"le sport","video sport jfjejfiejfiej enfieoife enfienfoie enozojzozf enfeoznf fei"));
+
 
 
         ContributeurAdapter adapter = new ContributeurAdapter(this, contributeur);

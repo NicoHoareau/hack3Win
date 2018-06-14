@@ -4,13 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConnectionActivity">
+    tools:context=".ConnectionActivity"
+    android:background="@color/colorBack">
 
 
     <EditText
         android:id="@+id/et_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorBlue"
+        android:textColorHint="@color/colorBlue"
         android:layout_marginEnd="85dp"
         android:layout_marginLeft="84dp"
         android:layout_marginRight="85dp"
@@ -27,6 +30,8 @@
         android:id="@+id/et_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorBlue"
+        android:textColorHint="@color/colorBlue"
         android:layout_marginEnd="84dp"
         android:layout_marginLeft="85dp"
         android:layout_marginRight="84dp"
@@ -76,7 +81,7 @@
         android:layout_marginLeft="130dp"
         android:layout_marginRight="130dp"
         android:layout_marginStart="130dp"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorBlue"
         android:text="WinNews"
         android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -87,6 +92,8 @@
         android:id="@+id/bt_connection"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:shadowColor="@color/colorBlue"
+        android:textColor="@color/colorBack"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
