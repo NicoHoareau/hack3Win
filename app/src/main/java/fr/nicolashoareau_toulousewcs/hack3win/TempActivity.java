@@ -9,6 +9,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -16,31 +18,28 @@ import android.support.v4.content.ContextCompat;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.places.GeoDataClient;
-import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import br.com.bloder.magic.view.MagicButton;
 
 public class TempActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener {
 
@@ -52,8 +51,15 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
     //private PlaceArrayAdapter mPlaceArrayAdapter;
     private GoogleApiClient mGoogleApiClient;
 
-    //magic button :
-    MagicButton mMagicButton;
+    //btn title article :
+    FloatingActionButton mBtnTitleArticle;
+    FloatingActionButton mBtnVideoArticle;
+    FloatingActionButton mBtnMapsArticle;
+    private TextView tvTitleArticle;
+    private EditText etTitleArticle;
+    private Boolean isClick = false;
+    ConstraintLayout consLayoutMaps;
+    ConstraintLayout consLayoutVideo;
 
 
     @Override
@@ -73,14 +79,82 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
 
         init();
 
-
-        mMagicButton = findViewById(R.id.mg_btn_video);
-        mMagicButton.setMagicButtonClickListener(new View.OnClickListener() {
+        tvTitleArticle = findViewById(R.id.tv_title_article);
+        etTitleArticle = findViewById(R.id.et_title_article);
+        mBtnTitleArticle = findViewById(R.id.fab_title_article);
+        mBtnTitleArticle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(TempActivity.this, "Magic button", Toast.LENGTH_SHORT).show();
+                if (!isClick) {
+                    tvTitleArticle.setVisibility(View.VISIBLE);
+                    etTitleArticle.setVisibility(View.VISIBLE);
+                    isClick = true;
+                }
+                else {
+                    tvTitleArticle.setVisibility(View.GONE);
+                    etTitleArticle.setVisibility(View.GONE);
+                    isClick = false;
+                }
+
+
             }
         });
+
+        consLayoutMaps = findViewById(R.id.consLayout);
+        mBtnMapsArticle = findViewById(R.id.fab_maps_article);
+        mBtnMapsArticle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!isClick) {
+                    consLayoutMaps.setVisibility(View.VISIBLE);
+                    isClick = true;
+                }
+                else {
+                    consLayoutMaps.setVisibility(View.GONE);
+                    isClick = false;
+                }
+            }
+        });
+
+        consLayoutVideo = findViewById(R.id.cnsLayoutVideo);
+        mBtnVideoArticle = findViewById(R.id.fab_video_article);
+        mBtnVideoArticle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!isClick) {
+                    consLayoutVideo.setVisibility(View.VISIBLE);
+                    isClick = true;
+                }
+                else {
+                    consLayoutVideo.setVisibility(View.GONE);
+                    isClick = false;
+                }
+            }
+        });
+
+        final Spinner spinnerTag1 = findViewById(R.id.spin_tag1);
+        //Utiliser un Adapter pour rentrer les données du spinner_array
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.spinner_tag1, android.R.layout.simple_spinner_item);
+        //Spécifier le layout à utiliser pour afficher les données
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //Appliquer l'adapter au spinner
+        spinnerTag1.setAdapter(adapter);
+        spinnerTag1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selection = spinnerTag1.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+
+
 
     }
 

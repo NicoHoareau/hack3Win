@@ -29,7 +29,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fab_create_video" />
+        app:layout_constraintTop_toBottomOf="@+id/fab_create_video"
+        android:layout_width="match_parent" />
 
     <Spinner
         android:id="@+id/spin_tag1"
@@ -48,7 +49,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         app:layout_constraintEnd_toEndOf="@+id/post_video"
-        tools:layout_editor_absoluteY="219dp" />
+        tools:layout_editor_absoluteY="219dp"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/iv_youtube_logo"
@@ -58,5 +60,6 @@
         app:layout_constraintHorizontal_bias="0.102"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@mipmap/ic_launcher"
-        tools:layout_editor_absoluteY="266dp" />
+        tools:layout_editor_absoluteY="266dp"
+        tools:ignore="MissingConstraints" />
 </android.support.constraint.ConstraintLayout>
