@@ -21,6 +21,7 @@ import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;
@@ -28,14 +29,16 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener {
 
-
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mAuth = FirebaseAuth.getInstance();
 
         //Navigation Drawer :
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_menu);
@@ -54,23 +57,17 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (id == R.id.profil) {
-            //Intent goToProfil = new Intent(ZoomArticlesActivity.this, ProfilActivity.class);
-            //this.startActivity(goToProfil);
-        } else if (id == R.id.reader) {
-            //Intent goToJoin = new Intent(this, JoinQuizzActivity.class);
-            //this.startActivity(goToJoin);
+        if (id == R.id.reader) {
+            Intent goToJoin = new Intent(this, MainActivity.class);
+            this.startActivity(goToJoin);
         } else if (id == R.id.contributor) {
             Intent goToContributor = new Intent(this, ContributeurActivity.class);
             this.startActivity(goToContributor);
-        } else if (id == R.id.articles) {
-            //intent
-
         } else if (id == R.id.logout) {
             //Déconnexion
-            /*mAuth = FirebaseAuth.getInstance();
+            mAuth = FirebaseAuth.getInstance();
             mAuth.signOut();
-            startActivity(new Intent(this, MainActivity.class));*/
+            startActivity(new Intent(this, ConnectionActivity.class));
         }
         return true;
 
