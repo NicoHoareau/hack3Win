@@ -13,7 +13,6 @@ import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;
 
-import fr.nicolashoareau_toulousewcs.hack3win.R;
 
 public class MainActivity extends Activity {
 
