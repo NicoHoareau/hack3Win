@@ -1,5 +1,6 @@
 package fr.nicolashoareau_toulousewcs.hack3win;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -42,8 +43,8 @@ public class ZoomArticlesActivity extends AppCompatActivity implements Navigatio
             //Intent goToJoin = new Intent(this, JoinQuizzActivity.class);
             //this.startActivity(goToJoin);
         } else if (id == R.id.contributor) {
-            //Intent goToCreate = new Intent(this, CreateQuizzActivity.class);
-            // this.startActivity(goToCreate);
+            Intent goToContributor = new Intent(this, ContributeurActivity.class);
+            this.startActivity(goToContributor);
         } else if (id == R.id.articles) {
             //intent
 
