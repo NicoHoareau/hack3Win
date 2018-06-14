@@ -19,7 +19,8 @@
 
         <activity android:name=".MainActivity">
         </activity>
-        <activity android:name=".ConnectionActivity"/>
+
+        <activity android:name=".ConnectionActivity"></activity>
 
         <activity android:name=".ZoomArticlesActivity">
 
@@ -40,11 +41,15 @@
         <activity
             android:name=".TempActivity"
             android:label="@string/title_activity_temp">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".ZoomArticlesActivity">
         </activity>
 
         <activity android:name=".ContributeurActivity"></activity>
