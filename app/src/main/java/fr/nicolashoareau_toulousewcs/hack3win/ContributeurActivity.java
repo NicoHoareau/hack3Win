@@ -16,9 +16,6 @@ public class ContributeurActivity extends AppCompatActivity {
         final ListView listView = findViewById(R.id.listview_contributeur);
         ArrayList<ContributeurModel> contributeur = new ArrayList<>();
 
-
-
-
         ContributeurAdapter adapter = new ContributeurAdapter(this, contributeur);
         listView.setAdapter(adapter);
     }
