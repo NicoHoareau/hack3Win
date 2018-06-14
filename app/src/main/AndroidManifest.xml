@@ -8,11 +8,16 @@
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:allowBackup="true"
@@ -21,11 +26,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-        </activity>
-        <activity android:name=".ConnectionActivity"></activity>
-        <activity android:name=".ZoomArticlesActivity"></activity>
-        <activity android:name=".RecordActivity"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"><intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
+        <activity android:name=".ConnectionActivity" />
+        <activity android:name=".ZoomArticlesActivity" />
+        <activity android:name=".RecordActivity" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -41,19 +51,11 @@
 
         <activity
             android:name=".TempActivity"
-            android:label="@string/title_activity_temp">
-        </activity>
-
-        <activity android:name=".ContributeurActivity"></activity>
-
+            android:label="@string/title_activity_temp"></activity>
+        <activity android:name=".ContributeurActivity" />
         <activity android:name=".YoutubeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
