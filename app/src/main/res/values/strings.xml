@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">hack3Win</string>
+    <string name="app_name">WinNews</string>
+    <string-array name="status">
+        <item>Lecteur</item>
+        <item>Contributeur</item>
+    </string-array>
 </resources>
