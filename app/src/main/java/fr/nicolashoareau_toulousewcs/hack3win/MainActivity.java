@@ -1,6 +1,7 @@
 package fr.nicolashoareau_toulousewcs.hack3win;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,10 +16,14 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-public class MainActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener {
 
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    FirebaseAuth mAuth;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
 
@@ -26,6 +31,9 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle("Toutes les news");
+
+        mAuth = FirebaseAuth.getInstance();
 
         //Navigation Drawer :
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_menu);
@@ -96,23 +104,17 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (id == R.id.profil) {
-            //Intent goToProfil = new Intent(ZoomArticlesActivity.this, ProfilActivity.class);
-            //this.startActivity(goToProfil);
-        } else if (id == R.id.reader) {
-            //Intent goToJoin = new Intent(this, JoinQuizzActivity.class);
-            //this.startActivity(goToJoin);
+        if (id == R.id.reader) {
+            Intent goToJoin = new Intent(this, MainActivity.class);
+            this.startActivity(goToJoin);
         } else if (id == R.id.contributor) {
             Intent goToContributor = new Intent(this, ContributeurActivity.class);
             this.startActivity(goToContributor);
-        } else if (id == R.id.articles) {
-            //intent
-
         } else if (id == R.id.logout) {
             //Déconnexion
-            /*mAuth = FirebaseAuth.getInstance();
+            mAuth = FirebaseAuth.getInstance();
             mAuth.signOut();
-            startActivity(new Intent(this, MainActivity.class));*/
+            startActivity(new Intent(this, ConnectionActivity.class));
         }
         return true;
 

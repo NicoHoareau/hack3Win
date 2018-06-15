@@ -6,186 +6,325 @@
     android:layout_height="match_parent"
     tools:context=".TempActivity">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_title_article"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-
-    <TextView
-        android:id="@+id/tv_title_article"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="12dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
-        android:layout_weight="1"
-        android:text="Titre de l'article"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@+id/fab_title_article"
-        app:layout_constraintTop_toBottomOf="@+id/fab_title_article" />
-
-    <EditText
-        android:id="@+id/et_title_article"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:layout_weight="1"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_title_article"
-        app:layout_constraintTop_toBottomOf="@+id/fab_title_article" />
-
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_video_article"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title_article"
-        tools:ignore="MissingConstraints" />
-
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/cnsLayoutVideo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fab_video_article">
-
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_create_video"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:clickable="true"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/ic_input_add" />
-
-        <VideoView
-            android:id="@+id/post_video"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="121dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fab_create_video" />
+            android:layout_height="match_parent">
 
-        <Spinner
-            android:id="@+id/spin_tag1"
-            android:layout_width="wrap_content"
-            android:layout_height="28dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/post_video"
-            app:layout_constraintTop_toBottomOf="@+id/post_video" />
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_title_article"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints"
+                android:src="@drawable/icon_fab_title_article"/>
 
-    </android.support.constraint.ConstraintLayout>
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/cnsLayoutArticle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fab_title_article">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_maps_article"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cnsLayoutVideo"
-        tools:ignore="MissingConstraints" />
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/consLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fab_maps_article">
+                <TextView
+                    android:id="@+id/tv_title_article"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:background="#1e3278"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="Titre de l'article"
+                    android:textColor="#ffdc00"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/search_image"
-            android:layout_width="30dp"
-            android:layout_height="24dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:src="@drawable/ic_search_icon"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+                <EditText
+                    android:id="@+id/et_title_article"
+                    android:layout_width="0dp"
+                    android:layout_height="29dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#1e3278"
+                    android:inputType="text"
+                    android:singleLine="false"
+                    android:textColor="#ffdc00"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tv_title_article"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <AutoCompleteTextView
-            android:id="@+id/input_search"
-            android:layout_width="298dp"
-            android:layout_height="23dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginStart="4dp"
-            android:background="@null"
-            android:gravity="center"
-            android:hint="Entrer une adresse, une ville ou un code postale"
-            android:imeOptions="actionSearch"
-            android:textColor="#000"
-            android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@+id/search_image"
-            app:layout_constraintTop_toTopOf="parent" />
+                <EditText
+                    android:id="@+id/et_resume"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:hint="Résumer de l'article"
+                    android:textColorHint="#1e3278"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_title_article" />
 
-        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="248dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/input_search"
-            tools:context=".TempActivity" />
+                <EditText
+                    android:id="@+id/et_link"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="32dp"
+                    android:hint="Lien vers l'article"
+                    android:textColorHint="#1e3278"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_resume" />
 
-    </android.support.constraint.ConstraintLayout>
+            </android.support.constraint.ConstraintLayout>
+
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_video_article"
+                android:src="@drawable/icon_fab_video_play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cnsLayoutArticle"
+                tools:ignore="MissingConstraints" />
+
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/cnsLayoutVideo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fab_video_article">
+
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab_create_video"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:src="@drawable/icon_fab_recorder"
+                    app:elevation="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@android:drawable/ic_input_add" />
+
+                <VideoView
+                    android:id="@+id/vv_record"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/fab_create_video" />
+
+                <Spinner
+                    android:id="@+id/spin_tag1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/vv_record" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_maps_article"
+                android:src="@drawable/icon_fab_maps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cnsLayoutVideo"
+                tools:ignore="MissingConstraints" />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/consLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fab_maps_article">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/search_image"
+                    android:layout_width="30dp"
+                    android:layout_height="24dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_search_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/input_search"
+                    android:layout_width="298dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:background="#1e3278"
+                    android:gravity="center"
+                    android:hint="Appuyer sur le bouton pour afficher la ville dans laquel vous êtes !"
+                    android:lines="2"
+                    android:textColor="#ffdc00"
+                    android:textColorHint="#ffdc00"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/search_image"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="248dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/input_search"
+                    tools:context=".TempActivity" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <Button
+                android:id="@+id/btn_validate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:background="@android:color/transparent"
+                android:text="Enregistrer ma news"
+                android:textColor="#1e3278"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/consLayout" />
+
+            <TextView
+                android:id="@+id/title_btn_video"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:background="#1e3278"
+                android:padding="5dp"
+                android:text="Vidéo"
+                android:textColor="#ffdc00"
+                android:textSize="16sp"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@+id/fab_video_article"
+                app:layout_constraintTop_toTopOf="@+id/fab_video_article" />
+
+            <TextView
+                android:id="@+id/title_btn_maps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:background="#1e3278"
+                android:padding="5dp"
+                android:text="Géolocalisation"
+                android:textColor="#ffdc00"
+                android:textSize="16sp"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@+id/fab_maps_article"
+                app:layout_constraintTop_toTopOf="@+id/fab_maps_article" />
+
+            <TextView
+                android:id="@+id/title_btn_article"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:background="#1e3278"
+                android:padding="5dp"
+                android:text="Informations"
+                android:textColor="#ffdc00"
+                android:textSize="16sp"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@+id/fab_title_article"
+                app:layout_constraintTop_toTopOf="@+id/fab_title_article" />
+
+
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+
 
 
 

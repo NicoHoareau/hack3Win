@@ -30,7 +30,7 @@ public class RecordActivity extends AppCompatActivity {
             if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
                 startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
             }
-    }
+        }
 
 
     });
