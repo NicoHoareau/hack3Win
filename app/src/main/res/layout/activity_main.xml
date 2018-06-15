@@ -14,8 +14,8 @@
         app:menu="@menu/nav_menu"
         android:layout_gravity="start"
         android:id="@+id/nav_view"
-        app:itemTextColor="#ffdc00"
-        android:background = "#1e3278">
+        app:itemTextColor="@color/colorBlue"
+        android:background = "@color/colorBack">
 
     </android.support.design.widget.NavigationView>
 
