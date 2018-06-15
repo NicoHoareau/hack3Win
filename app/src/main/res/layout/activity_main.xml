@@ -5,7 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_menu"
-    tools:context=".ZoomArticlesActivity">
+   >
+
+    <ListView
+        android:id="@+id/lv_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <android.support.design.widget.NavigationView
         app:headerLayout="@layout/header"
@@ -16,7 +21,6 @@
         android:id="@+id/nav_view"
         app:itemTextColor="@color/colorBlue"
         android:background = "@color/colorBack">
-
     </android.support.design.widget.NavigationView>
 
 

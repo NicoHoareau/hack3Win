@@ -21,6 +21,15 @@
         android:roundIcon="@mipmap/icon_launch_app"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="fr.nicolashoareau_toulousewcs.appliwcsprojet.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -34,9 +43,7 @@
         <activity android:name=".ConnectionActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
 
-        <activity android:name=".ZoomArticlesActivity">
 
-        </activity>
 
         <activity android:name=".RecordActivity" />
 
@@ -55,6 +62,7 @@
         <activity android:name=".TempActivity"></activity>
 
         <activity android:name=".ContributeurActivity" />
+        <activity android:name=".ZoomArticlesActivity"/>
 
     </application>
 
