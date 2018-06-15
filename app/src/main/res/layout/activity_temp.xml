@@ -22,10 +22,10 @@
                 android:layout_marginLeft="24dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
+                android:src="@drawable/note"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="MissingConstraints"
-                android:src="@drawable/icon_fab_title_article"/>
+                tools:ignore="MissingConstraints" />
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/cnsLayoutArticle"
@@ -51,28 +51,27 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:background="#1e3278"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
                     android:text="Titre de l'article"
-                    android:textColor="#ffdc00"
+                    android:textColor="@color/colorBlue"
                     android:textSize="16sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
                     android:id="@+id/et_title_article"
                     android:layout_width="0dp"
-                    android:layout_height="29dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="10dp"
-                    android:background="#1e3278"
                     android:inputType="text"
                     android:singleLine="false"
-                    android:textColor="#ffdc00"
+                    android:textColor="@color/colorBlue"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tv_title_article"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -87,7 +86,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:hint="Résumer de l'article"
-                    android:textColorHint="#1e3278"
+                    android:textColorHint="@color/colorBlue"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_title_article" />
@@ -114,12 +113,12 @@
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab_video_article"
-                android:src="@drawable/icon_fab_video_play"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="24dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
+                android:src="@drawable/play"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cnsLayoutArticle"
                 tools:ignore="MissingConstraints" />
@@ -145,13 +144,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="true"
-                    android:src="@drawable/icon_fab_recorder"
+                    android:src="@drawable/video_camera"
                     app:elevation="0dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@android:drawable/ic_input_add" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <VideoView
                     android:id="@+id/vv_record"
@@ -182,12 +180,12 @@
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab_maps_article"
-                android:src="@drawable/icon_fab_maps"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="24dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
+                android:src="@drawable/location"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cnsLayoutVideo"
                 tools:ignore="MissingConstraints" />
@@ -223,12 +221,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
-                    android:background="#1e3278"
                     android:gravity="center"
                     android:hint="Appuyer sur le bouton pour afficher la ville dans laquel vous êtes !"
                     android:lines="2"
-                    android:textColor="#ffdc00"
-                    android:textColorHint="#ffdc00"
+                    android:textColor="@color/colorBlue"
+                    android:textColorHint="@color/colorBlue"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/search_image"
@@ -276,12 +273,12 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:background="#1e3278"
                 android:padding="5dp"
                 android:text="Vidéo"
-                android:textColor="#ffdc00"
+                android:textColor="@color/colorBlue"
                 android:textSize="16sp"
-                android:visibility="gone"
+                android:textStyle="bold"
+                android:visibility="visible"
                 app:layout_constraintStart_toEndOf="@+id/fab_video_article"
                 app:layout_constraintTop_toTopOf="@+id/fab_video_article" />
 
@@ -292,12 +289,12 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:background="#1e3278"
                 android:padding="5dp"
                 android:text="Géolocalisation"
-                android:textColor="#ffdc00"
+                android:textColor="@color/colorBlue"
                 android:textSize="16sp"
-                android:visibility="gone"
+                android:textStyle="bold"
+                android:visibility="visible"
                 app:layout_constraintStart_toEndOf="@+id/fab_maps_article"
                 app:layout_constraintTop_toTopOf="@+id/fab_maps_article" />
 
@@ -308,16 +305,26 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:background="#1e3278"
                 android:padding="5dp"
                 android:text="Informations"
-                android:textColor="#ffdc00"
+                android:textColor="@color/colorBlue"
                 android:textSize="16sp"
-                android:visibility="gone"
+                android:textStyle="bold"
+                android:visibility="visible"
                 app:layout_constraintStart_toEndOf="@+id/fab_title_article"
                 app:layout_constraintTop_toTopOf="@+id/fab_title_article" />
 
-
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="32dp"
+                android:src="@drawable/winnews"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_validate" />
 
 
         </android.support.constraint.ConstraintLayout>
