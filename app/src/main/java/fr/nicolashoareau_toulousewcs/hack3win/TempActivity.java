@@ -11,6 +11,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -18,6 +19,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -41,8 +43,20 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -68,6 +82,14 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
     private EditText etTitleArticle;
     private Boolean isClick = false;
 
+    FirebaseDatabase mDatabase;
+    DatabaseReference mRef;
+    String mUid;
+    FirebaseAuth mAuth;
+    private String mCurrentPhotoPath;
+    private String mGetVideoUrl = "";
+    private Uri mVideoUri;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +99,11 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        mDatabase = FirebaseDatabase.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        mUid = mAuth.getCurrentUser().getUid();
+
 
         mCoordonateText = findViewById(R.id.input_search);
 
@@ -140,7 +167,19 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
                         public void onClick(View v) {
                             Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
                             if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
+                                File photoFile = null;
+                                try {
+                                    photoFile = createVideoFile();
+                                } catch (IOException ex) {
+                                }
+                                // Continue only if the File was successfully created
+                                if (photoFile != null) {
+                                    mVideoUri = FileProvider.getUriForFile(getApplicationContext(),
+                                            "fr.nicolashoareau_toulousewcs.appliwcsprojet.fileprovider",
+                                            photoFile);
                                 startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
+                            }
+
                             }
                         }
                     });
@@ -180,16 +219,79 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
                 Intent intent = new Intent(TempActivity.this, MainActivity.class);
                 startActivity(intent);
                 Toast.makeText(TempActivity.this, "Article enregistré", Toast.LENGTH_SHORT).show();
+
+                mRef = mDatabase.getReference("Users").child(mUid).child("news");
+                mRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (!mGetVideoUrl.equals("") && mGetVideoUrl != null) {
+                            StorageReference avatarRef = FirebaseStorage.getInstance().getReference("newsRef");
+                            avatarRef.putFile(mVideoUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    Uri downloadUri = taskSnapshot.getDownloadUrl();
+                                    final String avatarUrl = downloadUri.toString();
+                                    mDatabase = FirebaseDatabase.getInstance();
+                                    mUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                    DatabaseReference userRef = mDatabase.getReference("Users").child(mUid).child("news");
+                                    userRef.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            /*UserModel userModel = dataSnapshot.getValue(UserModel.class);
+                                            String pseudo =  userModel.getPseudo();
+                                            String urlPhotoUser = userModel.getProfilPic();
+                                            ActualityModel actualityModel = new ActualityModel(pseudo, textDescriptionPost, avatarUrl, urlPhotoUser, dateLong, mUid);
+                                            mCreatePostRef.push().setValue(actualityModel);*/
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+                                        }
+                                    });
+
+                                }
+                            });
+                            Intent intent = new Intent(TempActivity.this, ContributeurActivity.class);
+                            startActivity(intent);
+                        }
+                        else {
+                            Toast.makeText(TempActivity.this, "no_image", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
             }
         });
 
     }
 
+    private File createVideoFile() throws IOException {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "MP4_" + timeStamp + "_";
+        File storageDir = TempActivity.this.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".mp4",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
-            Uri videoUri = data.getData();
-            mVrecord.setVideoURI(videoUri);
+            mVideoUri = data.getData();
+            mGetVideoUrl = mVideoUri.getPath();
+            mVrecord.setVideoURI(mVideoUri);
             mVrecord.start();
         }
     }
@@ -338,8 +440,6 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
                 geoLocate(location);
             }
         });
-
-
     }
 
 
