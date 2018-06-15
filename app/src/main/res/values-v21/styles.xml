@@ -13,5 +13,6 @@
         <item name="colorAccent">@color/colorBlue</item>
         <item name="android:navigationBarColor">@color/colorBack</item>
         <item name="android:colorForeground">@color/foreground_material_light</item>
+        <item name="android:statusBarColor">@color/colorBack</item>
     </style>
 </resources>
