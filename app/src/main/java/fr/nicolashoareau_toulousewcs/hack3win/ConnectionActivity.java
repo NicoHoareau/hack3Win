@@ -34,7 +34,7 @@ public class ConnectionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_connection);
 
         final Spinner spinner = findViewById(R.id.spinner_profile);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(ConnectionActivity.this, R.array.status, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(ConnectionActivity.this, R.array.status, R.layout.spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
