@@ -80,13 +80,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 "les moyens de ses ambitions grace à une levée de fonds de 1,7 Milllions auprès\n" +
                 "duCredit Agricole ou encore la Societe Generale.","CVa-vneVoQs",R.drawable.video6,"http://www.alloweb.org/levee-de-fonds-coworking-laboikos-leve-1-7-million-deuros/"));
         ItemAdapter adapter = new ItemAdapter(this, articleList);
-        listTrip.setAdapter( adapter);
+        listTrip.setAdapter(adapter);
 
         listTrip.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(MainActivity.this, ZoomArticleActivity.class);
-
+                Intent intent = new Intent(MainActivity.this, ZoomArticlesActivity.class);
                 ArticleModel currentArticle = articleList.get(i);
                 intent.putExtra("title", currentArticle.getTitle());
                 intent.putExtra("resume", currentArticle.getResume());

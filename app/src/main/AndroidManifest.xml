@@ -61,6 +61,7 @@
         <activity android:name=".TempActivity"></activity>
 
         <activity android:name=".ContributeurActivity" />
+        <activity android:name=".ZoomArticlesActivity"/>
 
     </application>
 

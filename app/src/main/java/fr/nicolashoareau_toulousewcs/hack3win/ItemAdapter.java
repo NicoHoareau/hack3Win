@@ -29,7 +29,6 @@ public class ItemAdapter extends ArrayAdapter<ArticleModel> {
             // Lookup view for data population
             TextView tvtitle = (TextView) convertView.findViewById(R.id.et_title);
             ImageView tvHome = convertView.findViewById(R.id.img_article);
-            assert articlemodel != null;
             Drawable drawableProfil= ContextCompat.getDrawable(getContext(), articlemodel.getMiniature());
             tvHome.setImageDrawable(drawableProfil);
             // Populate the data into the template view using the data object
