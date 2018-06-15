@@ -1,5 +1,6 @@
 package fr.nicolashoareau_toulousewcs.hack3win;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -40,15 +41,19 @@ public class ZoomArticlesActivity extends YouTubeBaseActivity {
         });
 
         TextView tvArticleTitle = findViewById(R.id.tv_articles_title);
+
         TextView tvArticleResume = findViewById(R.id.tv_resume_articles);
+
         Button link = findViewById(R.id.btn_link);
-
-
         //click bouton lien vers le site
         link.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //TODO : récupérer l'url de l'article et le remplacer
+                //String url = "https://play.google.com/store/apps/developer?id=Wild+Code+School";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                //i.setData(Uri.parse(url));
+                startActivity(i);
             }
         });
 
