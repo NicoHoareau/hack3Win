@@ -131,7 +131,6 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
                     isClick = true;
                 } else {
                     consLayoutArticle.setVisibility(View.GONE);
-                    tvInfo.setVisibility(View.GONE);
                     isClick = false;
                 }
 
@@ -151,7 +150,6 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
                     isClick = true;
                 } else {
                     consLayoutMaps.setVisibility(View.GONE);
-                    tvMaps.setVisibility(View.GONE);
                     isClick = false;
                 }
             }
@@ -192,7 +190,6 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
                     isClick = true;
                 } else {
                     consLayoutVideo.setVisibility(View.GONE);
-                    tvVideo.setVisibility(View.GONE);
                     isClick = false;
                 }
             }
