@@ -23,7 +23,7 @@
         android:theme="@style/AppTheme">
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="fr.nicolashoareau_toulousewcs.appliwcsprojet.fileprovider"
+            android:authorities="fr.nicolashoareau_toulousewcs.hack3win.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

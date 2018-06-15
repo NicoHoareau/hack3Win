@@ -5,15 +5,18 @@ import android.widget.VideoView;
 public class ContributeurModel {
 
     String video;
-    String namevideo;
-    String descriptionvideo;
+    String title;
+    String resume;
 
-    public ContributeurModel(String video, String namevideo, String descriptionvideo) {
+    public ContributeurModel(String video, String title, String resume) {
         this.video = video;
-        this.namevideo = namevideo;
-        this.descriptionvideo = descriptionvideo;
+        this.title = title;
+        this.resume = resume;
     }
 
+    public ContributeurModel(){
+
+    }
     public String getVideo() {
         return video;
     }
@@ -22,19 +25,19 @@ public class ContributeurModel {
         this.video = video;
     }
 
-    public String getNamevideo() {
-        return namevideo;
+    public String getTitle() {
+        return title;
     }
 
-    public void setNamevideo(String namevideo) {
-        this.namevideo = namevideo;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getDescriptionvideo() {
-        return descriptionvideo;
+    public String getResume() {
+        return resume;
     }
 
-    public void setDescriptionvideo(String descriptionvideo) {
-        this.descriptionvideo = descriptionvideo;
+    public void setResume(String resume) {
+        this.resume = resume;
     }
 }

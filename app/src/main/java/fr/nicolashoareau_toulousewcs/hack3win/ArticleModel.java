@@ -17,6 +17,16 @@ public class ArticleModel {
         this.site = site;
     }
 
+    private String coordonate;
+
+    public ArticleModel(String title, String resume, String url, String site, String coordonate) {
+        this.title = title;
+        this.resume = resume;
+        this.url = url;
+        this.site = site;
+        this.coordonate = coordonate;
+    }
+
     public String getTitle() {
         return title;
     }
