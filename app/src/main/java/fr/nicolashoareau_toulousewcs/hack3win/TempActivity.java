@@ -20,6 +20,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -42,6 +43,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -80,6 +82,8 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleApiClient mGoogleApiClient;
     private TextView tvTitleArticle;
     private EditText etTitleArticle;
+    private EditText etResumeArticle;
+    private EditText etLink;
     private Boolean isClick = false;
 
     FirebaseDatabase mDatabase;
@@ -102,7 +106,7 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
 
         mDatabase = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
-        mUid = mAuth.getCurrentUser().getUid();
+
 
 
         mCoordonateText = findViewById(R.id.input_search);
@@ -113,6 +117,8 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
 
         tvTitleArticle = findViewById(R.id.tv_title_article);
         etTitleArticle = findViewById(R.id.et_title_article);
+        etLink = findViewById(R.id.et_link);
+        etResumeArticle = findViewById(R.id.et_resume);
         consLayoutArticle = findViewById(R.id.cnsLayoutArticle);
         mBtnTitleArticle = findViewById(R.id.fab_title_article);
         mBtnTitleArticle.setOnClickListener(new View.OnClickListener() {
@@ -175,7 +181,7 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
                                 // Continue only if the File was successfully created
                                 if (photoFile != null) {
                                     mVideoUri = FileProvider.getUriForFile(getApplicationContext(),
-                                            "fr.nicolashoareau_toulousewcs.appliwcsprojet.fileprovider",
+                                            "fr.nicolashoareau_toulousewcs.hack3win.fileprovider",
                                             photoFile);
                                 startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
                             }
@@ -194,7 +200,7 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
 
         final Spinner spinnerTag1 = findViewById(R.id.spin_tag1);
         //Utiliser un Adapter pour rentrer les données du spinner_array
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.spinner_tag1, android.R.layout.simple_spinner_item);
+        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.spinner_tag1, android.R.layout.simple_spinner_item);
         //Spécifier le layout à utiliser pour afficher les données
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Appliquer l'adapter au spinner
@@ -212,59 +218,54 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
 
+
+
         btnValidate = findViewById(R.id.btn_validate);
         btnValidate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TempActivity.this, MainActivity.class);
-                startActivity(intent);
-                Toast.makeText(TempActivity.this, "Article enregistré", Toast.LENGTH_SHORT).show();
+                final String titleArticle = etTitleArticle.getText().toString();
+                final String resumeArticle = etResumeArticle.getText().toString();
+                final String linkArticle = etLink.getText().toString();
+                final String coordonate = mCoordonateText.getText().toString();
 
-                mRef = mDatabase.getReference("Users").child(mUid).child("news");
+                /*mRef = mDatabase.getReference("Users").child("news");
                 mRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if (!mGetVideoUrl.equals("") && mGetVideoUrl != null) {
-                            StorageReference avatarRef = FirebaseStorage.getInstance().getReference("newsRef");
-                            avatarRef.putFile(mVideoUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    Uri downloadUri = taskSnapshot.getDownloadUrl();
-                                    final String avatarUrl = downloadUri.toString();
-                                    mDatabase = FirebaseDatabase.getInstance();
-                                    mUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                                    DatabaseReference userRef = mDatabase.getReference("Users").child(mUid).child("news");
-                                    userRef.addValueEventListener(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(DataSnapshot dataSnapshot) {
-                                            /*UserModel userModel = dataSnapshot.getValue(UserModel.class);
-                                            String pseudo =  userModel.getPseudo();
-                                            String urlPhotoUser = userModel.getProfilPic();
-                                            ActualityModel actualityModel = new ActualityModel(pseudo, textDescriptionPost, avatarUrl, urlPhotoUser, dateLong, mUid);
-                                            mCreatePostRef.push().setValue(actualityModel);*/
 
-                                        }
-
-                                        @Override
-                                        public void onCancelled(DatabaseError databaseError) {
-                                        }
-                                    });
-
-                                }
-                            });
-                            Intent intent = new Intent(TempActivity.this, ContributeurActivity.class);
-                            startActivity(intent);
-                        }
-                        else {
-                            Toast.makeText(TempActivity.this, "no_image", Toast.LENGTH_SHORT).show();
-                        }
                     }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
 
                     }
-                });
+                });*/
+
+                if (!mGetVideoUrl.equals("") && mGetVideoUrl != null) {
+                    StorageReference avatarRef = FirebaseStorage.getInstance().getReference("newsRef");
+                    avatarRef.putFile(mVideoUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Uri downloadUri = taskSnapshot.getDownloadUrl();
+                            final String avatarUrl = downloadUri.toString();
+                            mDatabase = FirebaseDatabase.getInstance();
+                            ArticleModel articleModel = new ArticleModel(titleArticle, resumeArticle, avatarUrl, linkArticle, coordonate);
+                            mDatabase.getReference("Users").child("news").push().setValue(articleModel);
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.d("aa", "onFailure: " + e.getMessage());                        }
+                    });
+                    Intent intent = new Intent(TempActivity.this, ContributeurActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(TempActivity.this, "Article enregistré", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(TempActivity.this, "no_image", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
