@@ -10,22 +10,20 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,53 +41,48 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class TempActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener {
 
+    static final int REQUEST_VIDEO_CAPTURE = 1;
     private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 1023;
-    private GoogleMap mMap;
-    private FusedLocationProviderClient mFusedLocationClient;
-
-    private AutoCompleteTextView mSearchText;
-    //private PlaceArrayAdapter mPlaceArrayAdapter;
-    private GoogleApiClient mGoogleApiClient;
-
     //btn title article :
     FloatingActionButton mBtnTitleArticle;
     FloatingActionButton mBtnVideoArticle;
     FloatingActionButton mBtnMapsArticle;
-    private TextView tvTitleArticle;
-    private EditText etTitleArticle;
-    private Boolean isClick = false;
     ConstraintLayout consLayoutMaps;
     ConstraintLayout consLayoutVideo;
     ConstraintLayout consLayoutArticle;
-
     Button btnValidate;
-
-    static final int REQUEST_VIDEO_CAPTURE = 1;
+    ImageView searchImage;
     VideoView mVrecord;
-
+    private GoogleMap mMap;
+    private FusedLocationProviderClient mFusedLocationClient;
+    private TextView mCoordonateText;
+    private GoogleApiClient mGoogleApiClient;
+    private TextView tvTitleArticle;
+    private EditText etTitleArticle;
+    private Boolean isClick = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_temp);
+        setTitle("Créer une news");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        mSearchText = (AutoCompleteTextView) findViewById(R.id.input_search);
+        mCoordonateText = findViewById(R.id.input_search);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         askLocationPermission();
-
-        init();
 
         tvTitleArticle = findViewById(R.id.tv_title_article);
         etTitleArticle = findViewById(R.id.et_title_article);
@@ -98,12 +91,14 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
         mBtnTitleArticle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                TextView tvInfo = findViewById(R.id.title_btn_article);
                 if (!isClick) {
                     consLayoutArticle.setVisibility(View.VISIBLE);
+                    tvInfo.setVisibility(View.VISIBLE);
                     isClick = true;
-                }
-                else {
+                } else {
                     consLayoutArticle.setVisibility(View.GONE);
+                    tvInfo.setVisibility(View.GONE);
                     isClick = false;
                 }
 
@@ -116,12 +111,14 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
         mBtnMapsArticle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                TextView tvMaps = findViewById(R.id.title_btn_maps);
                 if (!isClick) {
                     consLayoutMaps.setVisibility(View.VISIBLE);
+                    tvMaps.setVisibility(View.VISIBLE);
                     isClick = true;
-                }
-                else {
+                } else {
                     consLayoutMaps.setVisibility(View.GONE);
+                    tvMaps.setVisibility(View.GONE);
                     isClick = false;
                 }
             }
@@ -132,8 +129,10 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
         mBtnVideoArticle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                TextView tvVideo = findViewById(R.id.title_btn_video);
                 if (!isClick) {
                     consLayoutVideo.setVisibility(View.VISIBLE);
+                    tvVideo.setVisibility(View.VISIBLE);
                     FloatingActionButton record = findViewById(R.id.fab_create_video);
                     mVrecord = findViewById(R.id.vv_record);
                     record.setOnClickListener(new View.OnClickListener() {
@@ -146,9 +145,9 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
                         }
                     });
                     isClick = true;
-                }
-                else {
+                } else {
                     consLayoutVideo.setVisibility(View.GONE);
+                    tvVideo.setVisibility(View.GONE);
                     isClick = false;
                 }
             }
@@ -156,7 +155,7 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
 
         final Spinner spinnerTag1 = findViewById(R.id.spin_tag1);
         //Utiliser un Adapter pour rentrer les données du spinner_array
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.spinner_tag1, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.spinner_tag1, android.R.layout.simple_spinner_item);
         //Spécifier le layout à utiliser pour afficher les données
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Appliquer l'adapter au spinner
@@ -172,6 +171,7 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
         });
+
 
         btnValidate = findViewById(R.id.btn_validate);
         btnValidate.setOnClickListener(new View.OnClickListener() {
@@ -199,38 +199,18 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    private void init() {
 
-        //mPlaceAutocompleteAdapter = new PlaceAutocompleteAdapter(this, mGoogleApiClient, LAT_LNG_BOUNDS, null);
-
-        mSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE
-                        || event.getAction() == KeyEvent.ACTION_DOWN
-                        || event.getAction() == KeyEvent.KEYCODE_ENTER) {
-                    //TODO: execute our method for searching
-                    geoLocate();
-                }
-                return false;
-            }
-        });
-    }
-
-    private void geoLocate() {
-        String searchString = mSearchText.getText().toString();
-        Geocoder geocoder = new Geocoder(TempActivity.this);
-        List<Address> list = new ArrayList();
+    private void geoLocate(Location location) {
+        Geocoder gcd = new Geocoder(this, Locale.getDefault());
+        List<Address> addresses = null;
         try {
-            list = geocoder.getFromLocationName(searchString, 1);
-
-        } catch (IOException e){
-
+            addresses = gcd.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        if (list.size() > 0) {
-            Address address = list.get(0);
-            Toast.makeText(this, address.toString(), Toast.LENGTH_LONG).show();
-
+        if (addresses != null && addresses.size() > 0) {
+            String locality = addresses.get(0).getLocality();
+            mCoordonateText.setText(locality);
         }
 
 
@@ -246,7 +226,7 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
 
-              //la personne a déja refusée
+                //la personne a déja refusée
 
             } else {
                 //on ne lui a pas encore posée la question
@@ -294,15 +274,19 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
         // Define a listener that responds to location updates
         LocationListener locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
-                //mise à jour la position de l'utilisateur :
+                //mise à jour la position de l'utilisateur
                 moveCameraOnUser(location);
+
             }
 
-            public void onStatusChanged(String provider, int status, Bundle extras) {}
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+            }
 
-            public void onProviderEnabled(String provider) {}
+            public void onProviderEnabled(String provider) {
+            }
 
-            public void onProviderDisabled(String provider) {}
+            public void onProviderDisabled(String provider) {
+            }
         };
         //Si l'utilisateur a permis l'utilisation de la localisation
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -318,7 +302,7 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
                     });
 
             //Si l'utilisateur n'a pas désactivée la localisation du téléphone
-            if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
+            if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
                 //Demande la position de l'utilisateur
                 locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0,
                         0, locationListener);
@@ -331,28 +315,32 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    private void moveCameraOnUser(Location location) {
-        LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
+    private void moveCameraOnUser(final Location location) {
+        final LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
         //ajoute un marker :
         mMap.addMarker(new MarkerOptions().position(userLocation));
-        CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(userLocation, 12);
-        mMap.setBuildingsEnabled(true);
+
+        final CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(userLocation, 12);
+        mMap.moveCamera(yourLocation);
+
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
 
         }
 
-       // mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
-
-        //Marker marker = mMap.addMarker(new MarkerOptions().position(userLocation));
-        //marker.showInfoWindow();
+        //click image loupe :
+        searchImage = findViewById(R.id.search_image);
+        searchImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                geoLocate(location);
+            }
+        });
 
 
     }
-
-
-
 
 
     /**
@@ -368,9 +356,6 @@ public class TempActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setBuildingsEnabled(true);
-
-        init();
-
     }
 
 
